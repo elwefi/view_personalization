@@ -100,14 +100,12 @@ Model.create( name: "Modèle 3", basic: false, content:'<div class="row">
   <div class="col-md-3">  
     <div  id="container_2"><img alt="" class="product " src="/assets/images.jpg"></div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-7">
      <div id="text_edit_2">
        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ..
      </div>
   </div>
-  <div class="col-md-3">  
-    <div  id="container_4"><img alt="" class="product " src="/assets/images.jpg"></div>
-  </div>
+
 </div>
 
 <br> </br>
