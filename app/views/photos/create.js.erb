@@ -1,0 +1,7 @@
+$("<%= escape_javascript(render @photo) %>").appendTo("#products");
+
+$(function () {
+    $(".product").draggable({
+        helper: 'clone'
+   });
+});

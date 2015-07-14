@@ -1,0 +1,42 @@
+.jumbotron
+  #content
+    =raw @model.content
+
+%button#cancel_model.btn.btn-default{:type => "submit"} Annuler
+%button#update_model.btn.btn-primary{:type => "submit"} Sauvegarder
+
+:javascript
+  $(function () {
+    
+    // CANCEL
+    $('#cancel_model').on('click', function(e){
+      e.preventDefault();
+      $("#model_content").html("");
+    });
+
+    // UPDATE THIS MODEL
+    $("#update_model").on('click', function(e){
+        $('div[id^="text_edit_"]').attr('contenteditable','false');
+        var model_id = $( "#model_select" ).val();
+        var model_content = $("#content").html();
+        $.ajax({
+          url: "/models/" + model_id ,
+          data: { _method:'PUT', model: {id: model_id, content: model_content}},
+          type: "POST",
+          success: function(data) {
+            $('.alert').html("le contenu de modules is Enregistré Avec succès");
+            $(".alert").show();
+            $("#model_content").html("");
+            $(".alert").delay(1000).slideUp(200, function() {
+             $(this).hide();
+            });
+          },
+          failure: function() {
+            alert("Unsuccessful update");
+          }
+        });  
+  
+    });
+
+
+  });

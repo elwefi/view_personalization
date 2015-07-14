@@ -1,0 +1,65 @@
+.alert.alert-success{:role => "alert", :style => "display:none;"}
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading Personnalisation de modèle
+      .panel-body
+        .form-group
+          .col-md-3
+            %label Modèle par défaut:
+          .col-md-6
+            %select.form-control#model_select_default
+              - @models.each do |model|
+                %option{:value => "#{model.id}", :selected => model.basic}= model.name
+          .col-md-3
+            %button#default_model.btn.btn-primary{:type => "submit"} Sauvegarder
+        %br
+        %br
+        .form-group
+          .col-md-3
+            %label Modèle :
+          .col-md-6
+            %select.form-control#model_select
+              - @models.each do |model|
+                %option{:value => "#{model.id}"}= model.name
+          .col-md-3
+            %button#show_model.btn.btn-primary{:type => "submit"} Charger
+        %br
+        %br
+        #model_content
+
+  .col-md-6
+    .panel.panel-default
+      .panel-heading Gallery des images
+      .panel-body
+        %h1 Liste des images
+        .row#products
+          = render partial: "photos/photo", collection: @photos
+        %h1 Ajouter une image
+        = form_for @photo, :url => photos_path, :method => :post, :class => "form-horizontal", remote: true do |f|
+          .form-group
+            %label.control-label.col-sm-2 Image
+            .col-sm-10
+              = f.file_field :image
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              %button.btn.btn-default{:type => "submit"} Envoyer
+
+
+.span4.proj-div#target{"data-target" => "#myModal", "data-toggle" => "modal"} 
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", "data-backdrop" =>"static", "data-keyboard"=>"false", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4#myModalLabel.modal-title Personnalisation de bouton
+      .modal-body
+        .form-group
+          %label Background:
+          %input.color.form-control#color_backgroung
+        .form-group
+          %label Texte:
+          %input.color.form-control#color_text
+
+      .modal-footer
+        %button.btn.btn-default#cancel{"data-dismiss" => "modal", :type => "button"} Annuler
+        %button.btn.btn-primary#save{:type => "submit", "data-dismiss" => "modal",} Sauvegarder
